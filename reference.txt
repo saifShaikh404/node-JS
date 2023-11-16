@@ -1,54 +1,56 @@
-Node is JS runtime
-every JS file in node known as Module
+1). Express JS - minimilistic framework in node JS for creating apis
+ - Step 1. Install node - npm i express
+ - Step 2. import express in our project
+ - Step 3. create server using express()
 
-1). import export COMMON JS
+ - example
+    let express = require('express')
+    let server = express()
+    server.get('./',(req, res) => {
+        res.send("<h1>Hello World!!</h1>")
+    })
+    server.listen(8080)
 
-    export.js
-    exports.sum = (a, b) => {
-        return a + b
-    }
+2). There are many types of method to request but only 5 methods used commonly
+    - get, post, put, delete, patch
+    - get for getting data
+    - post for creating data
+    - put and patch for updating data
+    - delete for deleting data
+We used this methods for CRUD operation in backend
 
-    index.js
-    let funcs = require('./export.js') 
-    console.log(funcs.sum(5,6))
+3). middleware - it is a process to do something before the request is sent to server or certain API. There is many types of middleware we can create middleware on application level or certain routes etc
+-- example of custom middleware in app level :- 
+    server.use((req, res, next) => {
+        console.log(req.ip, req.method, req.hostname, new Date, req.get("User-agent"))
+        next()
+    })
+    - It runs whenever ther is any request on server
 
-2). ES module import export, we need to create pakage json file for it and put this command "type":"module"
+-- example of custom middleware on certain route
+    const auth = ((req, res, next) => {
+        console.log(req.query)
+        if(req.query.password == "123") {
+            next()
+        } else {
+            res.sendStatus(401)
+        }
+    })
 
-    export.js
-    let sum = (a, b) => {
-        return a + b
-    }
-    export {sum}
+    server.get('/',auth,(req,res) => {
+        res.json({type: "GET"})
+    })
+    - It will only run on ./ request
 
-    index.js
-    import {sum} from "./exports.js"
-    console.log(sum(10, 12))
+-- example of inbuilt middleware 
+    1). server.use(express.json()) - used to read json data from body request
+    2). server.use(express.urlencoded())
+    3). server.use(express.static('public')) - For static hosting
 
-3). pakage manager FILE SYSTEM -- Inbuild in node no need to install externally
-    let fs = require("fs");
-    let data = fs.readFileSync("./text.txt","utf-8")
-    console.log(data)
+- there is other types of third party middleware available as well
 
-    check index.js for better understanding
+4). types to get data in server from clients
 
-4). npm init -- command to initialize our project to node
-
-5). npm i express -- installing express command -- it will show in dependencies in package json
-
-6). In pakage json there is version of your installed dependencies like "express": "^4.18.2"
-    4 is major version
-    18 is minor version 
-    2 is patch version
-    * this sign indicates update all the version when available
-    ^ this sign indicates update minor and patch version when available
-    ~ this sign indicates update patch version when available
-    when there is no sign then dont update any version
-
-7). There is another type of dependencies known as dev dependencies is used for development time
-
-8). install dev dependencies npm nodemon --save-dev to install nodemon in dev dependencies 
-    In package json we can put "start" : "nodemon index.js" command in script and then run it like npm run start or npm start (because start is special command) so whenever there is change occurs in that file then it will run again after saving
-
-9). npm-update and npm-outdated is used to check outdated version of packages and updating dependencies
-
-10). npm uninstall express to uninstall any packages
+    - req.body - mostly sent data from form comes in req.body. this data type comes hidden from url 
+    - req.query - data when there is query parameter can be access with this method like ?password=123
+    - req.params - like url parameter
