@@ -1,21 +1,18 @@
-// Common JS import
-// let funcs = require('./export.js') 
-// console.log(funcs.sum(5,6), funcs.minus(6, 10))
+let express = require('express')
+let productRoute = require('./routes/productRoutes')
+let userRoute = require('./routes/userRoutes')
+// let productController = require('./controller/Products')
+let server = express()
 
+server.use(express.json())
+server.use('/', productRoute.products)
+server.use('/', userRoute.users)
 
-// Pakage Manager 
-// let fs = require("fs"); // internal pakage of node didnt need to install externally
-// console.log("started here")
+// server.post('/products', productController.createProduct)
+//     .get('/products', productController.getProducts)
+//     .get('/products/:id', productController.getProductById)
+//     .put('/products/:id', productController.replaceProduct)
+//     .patch('/products/:id',productController.updateProduct)
+//     .delete('/products/:id', productController.deleteProduct)
 
-// This read file sychronusly which is bad for performance
-// let data = fs.readFileSync("./text.txt","utf-8")
-// console.log(data)
-
-// This is async method with a callback function
-// let data = fs.readFile("./text.txt","utf-8",(err, data) => {
-//     console.log(data)
-// })
-
-console.log("ended here")
-
-
+server.listen(8080)
