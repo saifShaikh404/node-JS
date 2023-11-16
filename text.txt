@@ -1,0 +1,14 @@
+Initial Page Load: Lazy loading can be applied to load only the components or assets necessary for rendering the initial view of the page, while deferring the loading of less critical components until they are needed. This can improve the page's loading speed.
+
+Route-Based Lazy Loading: In a single-page application (SPA) built with React Router or a similar routing library, you can use lazy loading to load components for specific routes only when those routes are navigated to. This helps reduce the initial bundle size.
+
+User-Triggered Actions: Lazy loading can also be triggered by user interactions. For example, you might lazy load additional content when a user clicks a button or performs a specific action, such as opening a modal or expanding a section.
+
+Scroll-Based Lazy Loading: You can use libraries like React's react-intersection-observer to implement scroll-based lazy loading, where components or assets are loaded when they become visible in the user's viewport as they scroll down a page.
+Initial Page Load: Lazy loading can be applied to load only the components or assets necessary for rendering the initial view of the page, while deferring the loading of less critical components until they are needed. This can improve the page's loading speed.
+
+Route-Based Lazy Loading: In a single-page application (SPA) built with React Router or a similar routing library, you can use lazy loading to load components for specific routes only when those routes are navigated to. This helps reduce the initial bundle size.
+
+User-Triggered Actions: Lazy loading can also be triggered by user interactions. For example, you might lazy load additional content when a user clicks a button or performs a specific action, such as opening a modal or expanding a section.
+
+Scroll-Based Lazy Loading: You can use libraries like React's react-intersection-observer to implement scroll-based lazy loading, where components or assets are loaded when they become visible in the user's viewport as they scroll down a page.
