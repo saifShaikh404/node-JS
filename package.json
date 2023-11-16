@@ -1,17 +1,14 @@
 {
-  "name": "ch1-basics",
+  "name": "ch2-server",
   "version": "1.0.0",
-  "description": "This is chapter 1",
+  "description": "server",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon index.js", 
+    "start":"nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Saif",
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
   "devDependencies": {
     "nodemon": "^3.0.1"
   }

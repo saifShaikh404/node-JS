@@ -1,54 +1,20 @@
-Node is JS runtime
-every JS file in node known as Module
+1). Import http from node to create basic node server
+example :- 
+    let http = require('http')
+    let server = http.createServer((req, res) => {
+        res.end("<h1>Hello</h1>")
+    })
+    server.listen(8080)
 
-1). import export COMMON JS
+2). We can set headers in request to let browser the the type of our content or any other info
+example :- 
+    let server = http.createServer((req, res) => {
+        res.setHeader('Content-Type','text/html')
+        res.end("Hello")
 
-    export.js
-    exports.sum = (a, b) => {
-        return a + b
-    }
+        res.setHeader('Content-Type','application/json')
+        res.end(JSON.stringify(someData))
+    })
 
-    index.js
-    let funcs = require('./export.js') 
-    console.log(funcs.sum(5,6))
-
-2). ES module import export, we need to create pakage json file for it and put this command "type":"module"
-
-    export.js
-    let sum = (a, b) => {
-        return a + b
-    }
-    export {sum}
-
-    index.js
-    import {sum} from "./exports.js"
-    console.log(sum(10, 12))
-
-3). pakage manager FILE SYSTEM -- Inbuild in node no need to install externally
-    let fs = require("fs");
-    let data = fs.readFileSync("./text.txt","utf-8")
-    console.log(data)
-
-    check index.js for better understanding
-
-4). npm init -- command to initialize our project to node
-
-5). npm i express -- installing express command -- it will show in dependencies in package json
-
-6). In pakage json there is version of your installed dependencies like "express": "^4.18.2"
-    4 is major version
-    18 is minor version 
-    2 is patch version
-    * this sign indicates update all the version when available
-    ^ this sign indicates update minor and patch version when available
-    ~ this sign indicates update patch version when available
-    when there is no sign then dont update any version
-
-7). There is another type of dependencies known as dev dependencies is used for development time
-
-8). install dev dependencies npm nodemon --save-dev to install nodemon in dev dependencies 
-    In package json we can put "start" : "nodemon index.js" command in script and then run it like npm run start or npm start (because start is special command) so whenever there is change occurs in that file then it will run again after saving
-
-9). npm-update and npm-outdated is used to check outdated version of packages and updating dependencies
-
-10). npm uninstall express to uninstall any packages
+3). We can also share file from server to browser or SSR 
+- Check the method 3 to understand
