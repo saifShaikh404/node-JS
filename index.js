@@ -1,21 +1,63 @@
-// Common JS import
-// let funcs = require('./export.js') 
-// console.log(funcs.sum(5,6), funcs.minus(6, 10))
+let express = require('express')
+let fs = require('fs')
+
+let data = JSON.parse(fs.readFileSync('./data.json','utf-8'))
+let server = express()
 
 
-// Pakage Manager 
-// let fs = require("fs"); // internal pakage of node didnt need to install externally
-// console.log("started here")
+server.use(express.json())
 
-// This read file sychronusly which is bad for performance
-// let data = fs.readFileSync("./text.txt","utf-8")
-// console.log(data)
+// CRUD Operation - Create, Read, Update, Delete
 
-// This is async method with a callback function
-// let data = fs.readFile("./text.txt","utf-8",(err, data) => {
-//     console.log(data)
-// })
+// CREATE - create data
+server.post('/products',(req, res) => {
+    let newData = req.body
+    data.push(newData)
+    res.sendStatus(201)
+})
 
-console.log("ended here")
+// READ - read the data
+server.get('/products',(req, res) => {
+    res.json(data)
+})
+
+server.get('/products/:id', (req, res) => {
+    console.log(req.params)
+    let id = +req.params.id;
+    let singleProd = data.find((data) => data.id === id)
+    res.json(singleProd)
+})
+
+// UPDATE - updates the data
+
+server.put('/products/:id',(req, res) => {
+    let id = req.params.id
+    let dataToUpdate = req.body
+    let getDataIndex = data.findIndex((data) => data.id === +id)
+
+    data.splice(getDataIndex, 1, {id, ...dataToUpdate})
+    res.sendStatus(201)
+})
+
+server.patch('/products/:id',(req, res) => {
+    let id = req.params.id
+    let dataToUpdate = req.body
+    let getData = data.find((data) => data.id === +id)
+    let getDataIndex = data.findIndex((data) => data.id === +id)
+
+    data.splice(getDataIndex, 1, {id, ...getData, ...dataToUpdate})
+    res.sendStatus(201)
+})
+
+// DELETE - deletes data
+server.delete('/products/:id',(req, res) => {
+    let id = req.params.id
+    let getDataIndex = data.findIndex((data) => data.id === +id)
+
+    data.splice(getDataIndex, 1)
+    res.sendStatus(201)
+})
 
 
+
+server.listen(8080)
