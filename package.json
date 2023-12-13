@@ -1,18 +1,23 @@
 {
-  "name": "ch1-basics",
-  "version": "1.0.0",
-  "description": "This is chapter 1",
-  "main": "index.js",
-  "scripts": {
-    "start":"nodemon index.js", 
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Saif",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "name": "ch3-express",
+  "version": "1.0.0",
+  "description": "chapter 3 express",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "saif",
+  "license": "ISC"
 }

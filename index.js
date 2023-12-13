@@ -1,21 +1,40 @@
-// Common JS import
-// let funcs = require('./export.js') 
-// console.log(funcs.sum(5,6), funcs.minus(6, 10))
+const express = require('express');
+const server = express();
+const productRoute = require('./routes/productRoutes');
+const userRoute = require('./routes/userRoutes');
+const mongoose = require('mongoose');
+const env = require('dotenv');
+const jwt = require('jsonwebtoken')
 
 
-// Pakage Manager 
-// let fs = require("fs"); // internal pakage of node didnt need to install externally
-// console.log("started here")
+env.config();
 
-// This read file sychronusly which is bad for performance
-// let data = fs.readFileSync("./text.txt","utf-8")
-// console.log(data)
+main().catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("Database Connected")
+}
 
-// This is async method with a callback function
-// let data = fs.readFile("./text.txt","utf-8",(err, data) => {
-//     console.log(data)
-// })
+let auth = (req, res, next) => {
+  let token = req.get('Authorization').split('Bearer ')[1];
+  console.log(token)
+  try{
+    let decoded = jwt.verify(token, process.env.SECRET_KEY);
+    console.log(decoded)
+    if(decoded.email){
+      next();
+    }
+  }catch(err){
+    res.sendStatus(401)
+  }
+}
 
-console.log("ended here")
+server.use(express.json())
+server.use(express.urlencoded())
+
+server.use(express.static('public'))
+server.use('/', userRoute.users)
+server.use('/', auth, productRoute.products)
 
 
+server.listen(8080)
