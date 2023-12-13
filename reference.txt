@@ -1,1 +1,0 @@
-RestAPI are Api whos performing crud operation in a way they should be
