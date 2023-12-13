@@ -1,0 +1,45 @@
+1). show dbs -- shows all databases
+
+2). use local -- switch to database
+
+3). show collections -- show all the collection of database
+
+4). db.collection_name.find() -- shows the information of collection , collection name is name of tables basically
+
+5). use ecommerce -- create a new db if there is no ecommerce db
+
+6). exit() -- exit the mongoshell 
+
+7). db.products.insertOne({'title':'iphone'}) -- create a new collection if there is not and also generate a unique id of this collection data
+
+8). db.products.insertMany([{'title':'iphone'},{'title':'samsung'}]) -- add multiple data in collection we need to use array inside () for adding multiple data
+
+9). db.collection_name.findOne({title: 'iphone'}) -- give only one first match documents
+
+10). db.collection_name.findOne({title: {$eq:'iphone'}}) -- give only one first match documents -- eq means equal to , there is other query operator like $gt greater than, $lt less than etc
+
+11). db.collection_name.find({title: {$eq:'iphone'}, id:{$gt:1}}) -- its and AND operator for searching data -- default is AND
+
+12). db.collection_name.find({$and: [{title: {$eq:'iphone'}}, {id:{$gt:1}}]}) -- its checking multiple condition we can replace $and to $or for or condition
+ 
+13). db.collection_name.find({$and: [{title: {$eq:'iphone'}}, {id:{$gt:1}}]}).sort({"price":1}) -- sort ascending put -1 for decending
+
+14). db.collection_name.find({$and: [{title: {$eq:'iphone'}}, {id:{$gt:1}}]}).sort({"price":1}).limit(2) -- limit shows only 2 products in here.
+
+15). db.collection_name.countDocument() -- shows the number of documents we can also give this a condition like -- db.collection_name.countDocument({'price': {$gt: 600}})
+
+16). db.collection_name.find({'price':{$gt:600}}, {'title': 1, 'price': 1}) -- now it will only give title and price document 1 refers to true and 0 false - we called this second argument a projection
+
+17). db.collection_name.updateOne({'id':1},{$set: {'price': 999}}) -- update only one data which the given id if there is no field match then create the new one
+
+18). db.collection_name.updateOne({'id':1},{$set: {'price': 999}},{'upsert':true}) -- upsert means update insert - if there is no data match to update criteria then insert the data in new documents
+
+19). db.collection_name.updateMany({'id':{$gt:3}},{$set: {'price': 999}}) -- update many documents
+
+20). db.collection_name.replaceOne({'id':1},{'price': 999}) -- replace a whole object with new one
+
+21). db.collection_name.deleteOne({_id:1}) -- delete one data
+
+22). db.collection_name.deleteMany({price:999})--- delete many data
+
+
