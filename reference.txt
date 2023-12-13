@@ -1,0 +1,2 @@
+1). Mongoose is a library to perform database action from node to mongo db
+2). Schema :- Schema is a type , a protocol which contains rule of data basse that what kind of data should go in db
